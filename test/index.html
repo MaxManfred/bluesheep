@@ -1,0 +1,212 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="../js/math.min.js"></script>
+		<script type="text/javascript" src="../js/calculator.js"></script>
+		<script type="text/javascript" src="../js/event-handler.js"></script>
+		<script>
+			var $j = jQuery.noConflict();
+
+			$j(document).ready(function() {
+				setupEventHandling()
+			});
+		</script>
+	</head>
+	<body>
+		<form>
+			<table>
+				<tr>
+					<td style="padding: 30px;">
+						<!-- IMPORTO SCOMMESSA -->
+						<div>
+							<label for="scommessa">Puntata €</label>
+							<input type="text" id="scommessa" placeholder="100">
+						</div>
+						<br/>
+						<!-- RIMBORSO -->
+						<div>
+							<label for="rimborso">Rimborso €</label>
+							<input type="text" id="rimborso" placeholder="10">
+						</div>
+						<br/>
+						<!-- PERCENTUALE RIMBORSO -->
+						<div>
+							<label for="perc_rimborso">Rimborso %</label>
+							<input type="text" id="perc_rimborso" placeholder="50">
+						</div>
+					</td>
+					<td style="padding: 30px;">
+						<!-- RATING -->
+						<div>
+							<label for="multiplier_ev">Rating(%)</label>
+							<input type="text" id="multiplier_ev" readonly="readonly">
+						</div>
+						<br/>
+						<!-- PROFITTO -->
+						<div>
+							<label for="multiplier_profit-loss">Profitto</label>
+							<input type="text" id="multiplier_profit-loss" readonly="readonly">
+						</div>
+						<br/>
+						<!-- QUOTA TOTALE PUNTATE -->
+						<div>
+							<label for="multiplier_total-odds">Quota totale puntate</label>
+							<input type="text" id="multiplier_total-odds" readonly="readonly">
+						</div>
+						<br/>
+						<!-- QUOTA TOTALE BANCATE -->
+						<div>
+							<label for="multiplier_total-lay-odds">Quota totale bancate</label>
+							<input type="text" id="multiplier_total-lay-odds" readonly="readonly">
+						</div>
+					</td>
+				</tr>
+			</table>
+            <br/>
+			<br/>
+			<!-- GIOCATE MULTIPLE -->
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>Data/Ora</th>
+							<th>Evento</th>
+							<th>Risultato</th>
+							<th>Exchange</th>
+							<th>Quota puntata</th>
+							<th>Quota bancata</th>
+							<th>Com(%)</th>
+							<th>Banca(€)</th>
+							<th>Rischio</th>
+							<th>Esito</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- PRIMA GIOCATA -->
+						<tr id="r1">
+							<td>
+								<input readonly="readonly" type="datetime-local" placeholder="gg/mm/aaaa hh:mm">
+							</td>
+							<td>
+								<input readonly="readonly" type="text" placeholder="Partita 1">
+							</td>
+							<td>
+								<input readonly="readonly" type="text" placeholder="Risultato 1">
+							</td>
+							<td>
+								<select>
+									<option value="Betfair Exchange">Betfair</option>
+									<option value="Betflag">Betflag</option>
+								</select>
+							</td>
+							<td>
+								<input id="qp1" type="text" placeholder="" required="">
+							</td>
+							<td>
+								<input id="qb1" type="text" placeholder="" required="">
+							</td>
+							<td>
+								<input id="cm1" value="5">
+							</td>
+							<td>
+								<input id="bn1" type="text" readonly="readonly" placeholder="Banca 1">
+							</td>
+							<td>
+								<input id="rs1" type="text" readonly="readonly" placeholder="Rischio 1">
+							</td>
+							<td>
+								<span style="width: 55px; display: inline-block;">
+									<button id="v1" type="button"><b>V</b></button>
+									<button id="p1" type="button"><b>P</b></button>
+									<button id="l1" type="button"><b>L</b></button>
+								</span>
+							</td>
+						</tr>
+						<!-- SECONDA GIOCATA -->
+						<tr id="r2">
+							<td>
+								<input readonly="readonly" type="datetime-local" placeholder="gg/mm/aaaa hh:mm">
+							</td>
+							<td>
+								<input readonly="readonly" type="text" placeholder="Partita 2">
+							</td>
+							<td>
+								<input readonly="readonly" type="text" placeholder="Risultato 2">
+							</td>
+							<td>
+								<select>
+									<option value="Betfair Exchange">Betfair</option>
+									<option value="Betflag">Betflag</option>
+								</select>
+							</td>
+							<td>
+								<input id="qp2" type="text" placeholder="" required="">
+							</td>
+							<td>
+								<input id="qb2" type="text" placeholder="" required="">
+							</td>
+							<td>
+								<input id="cm2" value="5">
+							</td>
+							<td>
+								<input id="bn2" type="text" readonly="readonly" placeholder="Banca 2">
+							</td>
+							<td>
+								<input id="rs2" type="text" readonly="readonly" placeholder="Rischio 2">
+							</td>
+							<td>
+								<span style="width: 55px; display: inline-block;">
+									<button id="v2" type="button"><b>V</b></button>
+									<button id="p2" type="button"><b>P</b></button>
+									<button id="l2" type="button"><b>L</b></button>
+								</span>
+							</td>
+						</tr>
+						<!-- TERZA GIOCATA -->
+						<tr id="r3">
+							<td>
+								<input readonly="readonly" type="datetime-local" placeholder="gg/mm/aaaa hh:mm">
+							</td>
+							<td>
+								<input readonly="readonly" type="text" placeholder="Partita 3">
+							</td>
+							<td>
+								<input readonly="readonly" type="text" placeholder="Risultato 3">
+							</td>
+							<td>
+								<select>
+									<option value="Betfair Exchange">Betfair</option>
+									<option value="Betflag">Betflag</option>
+								</select>
+							</td>
+							<td>
+								<input id="qp3" type="text" placeholder="" required="">
+							</td>
+							<td>
+								<input id="qb3" type="text" placeholder="" required="">
+							</td>
+							<td>
+								<input id="cm3" value="5">
+							</td>
+							<td>
+								<input id="bn3" type="text" readonly="readonly" placeholder="Banca 3">
+							</td>
+							<td>
+								<input id="rs3" type="text" readonly="readonly" placeholder="Rischio 3">
+							</td>
+							<td>
+								<span style="width: 55px; display: inline-block;">
+									<!--
+									<button id="v3" type="button"><b>V</b></button>
+									<button id="p3" type="button"><b>P</b></button>
+									<button id="l3" type="button"><b>L</b></button>
+									-->
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+        </form>
+	</body>
+</html>
